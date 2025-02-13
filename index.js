@@ -7,7 +7,7 @@ const app = express();
 // Server configuration and startup
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor ejecutándose en el puerto ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
 
 /**
@@ -76,7 +76,7 @@ app.use((req, res, next) => {
  * Executes only for the routes defined in this router
  */
 router.use((req, res, next) => {
-  console.log('Middleware de nivel de direccionador ejecutado.');
+  console.log('Router middleware executed.');
   next();
 });
 
@@ -95,11 +95,11 @@ const messages = []; // Stores messages sent by producers
 app.post('/send', (req, res) => {
   const { message } = req.body;
   if (!message) {
-    return res.status(400).json({ error: 'El mensaje es requerido' });
+    return res.status(400).json({ error: 'Message is required.' });
   }
-  messages.push({ header: 'Mensaje', body: message });
-  console.log('Mensaje recibido:', message);
-  res.status(200).json({ status: 'Mensaje enviado exitosamente' });
+  messages.push({ header: 'Message', body: message });
+  console.log('Message sent: ', message);
+  res.status(200).json({ status: 'Message sent.' });
 });
 
 /**
@@ -128,11 +128,11 @@ app.get('/receive', (req, res) => {
 router.get('/route', (req, res) => {
   const { type } = req.query;
   if (type === 'text') {
-    res.send('Mensaje de texto enviado.');
+    res.send('Text message sent.');
   } else if (type === 'json') {
-    res.json({ message: 'Mensaje en formato JSON enviado.' });
+    res.json({ message: 'JSON message sent.' });
   } else {
-    res.status(400).send('Tipo de mensaje no soportado.');
+    res.status(400).send('Invalid type parameter.');
   }
 });
 
@@ -141,7 +141,7 @@ app.use('/api', router);
 
 // Error handling for undefined routes
 app.use((req, res, next) => {
-  next(new Error('Ruta no encontrada.'));
+  next(new Error(`Route not found: ${req.url}`));
 });
 
 /**
@@ -155,5 +155,5 @@ app.use((req, res, next) => {
  */
 app.use((err, req, res, next) => {
   console.error('Error:', err.message);
-  res.status(500).send('Error del servidor.');
+  res.status(500).send('Server error.');
 });
