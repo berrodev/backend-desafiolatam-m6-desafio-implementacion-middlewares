@@ -105,7 +105,7 @@ app.post('/send', (req, res) => {
 
 /**
  * Endpoint for consumers to receive messages
- * Consumers receive messages in the order they were sent
+ * Consumers receive messages in the order they were sent (FIFO pattern)
  *
  * @route GET /receive
  * @returns {Object} Message or empty response
