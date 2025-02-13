@@ -54,16 +54,19 @@ router.get('/logs', (req, res) => {
   res.json(logMessages);
 });
 
+let requestCount = 0;
+
 /**
  * Application-level middleware
- * Executes on every request that reaches the server
+ * Executes on every request that reaches the server to count the number of requests
  *
  * @param {Object} req - Request object
  * @param {Object} res - Response object
  * @param {Function} next - Function to pass to the next middleware
  */
 app.use((req, res, next) => {
-  console.log('Middleware de nivel de aplicación ejecutado.');
+  requestCount++;
+  console.log(`Request count: ${requestCount}`);
   next();
 });
 
