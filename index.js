@@ -34,7 +34,7 @@ app.use(morgan('dev'));
 const logMessages = [];
 
 /**
- * Router-level middleware to log messages
+ * Router-level middleware to log messages skipping the /logs endpoint
  * @param {string} message - Log message
  */
 app.use(
@@ -42,6 +42,7 @@ app.use(
     stream: {
       write: (message) => logMessages.push(message),
     },
+    skip: (req) => req.path === '/logs',
   })
 );
 
