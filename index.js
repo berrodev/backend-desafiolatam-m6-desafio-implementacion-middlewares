@@ -84,7 +84,6 @@ router.use((req, res, next) => {
  * Message system structure for message passing between producers and consumers
  */
 const messages = []; // Stores messages sent by producers
-const consumers = []; // Stores consumers subscribed to the message system
 
 /**
  * Endpoint to send messages
