@@ -1,0 +1,5 @@
+# Ignore pnpm files
+pnpm-lock.yaml
+
+# Ignore node_modules directory
+node_modules/
