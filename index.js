@@ -34,7 +34,7 @@ app.use(morgan('dev'));
 const logMessages = [];
 
 /**
- * Middleware to store log messages
+ * Router-level middleware to log messages
  * @param {string} message - Log message
  */
 app.use(
